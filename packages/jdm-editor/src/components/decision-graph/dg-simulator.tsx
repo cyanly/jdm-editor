@@ -6,7 +6,7 @@ import 'ace-builds/src-noconflict/theme-github_dark';
 import { Button, Spin, Tooltip, Typography, notification, theme } from 'antd';
 import clsx from 'clsx';
 import json5 from 'json5';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import ReactAce from 'react-ace';
 import { P, match } from 'ts-pattern';
 
@@ -30,6 +30,9 @@ export const GraphSimulator: React.FC<GraphSimulatorProps> = ({
 }) => {
   const { token } = theme.useToken();
   const [requestValue, setRequestValue] = useState(defaultRequest);
+  useEffect(() => {
+    setRequestValue(defaultRequest);
+  }, [defaultRequest]);
 
   const { stateStore } = useDecisionGraphRaw();
   const { nodeTypes, simulate } = useDecisionGraphState(({ decisionGraph, simulate }) => ({
